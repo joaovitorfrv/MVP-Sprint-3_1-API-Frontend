@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Pessoal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Container principal -->
+    <div class="container">
+        <!-- Cabeçalho -->
+        <header>
+            <!-- Menu de Links (Bookmarks) -->
+            <div class="bookmark-section">
+                <button id="bookmark-toggle" class="icon-button">
+                    <i class="fas fa-link"></i>
+                </button>
+                <div id="bookmark-panel" class="panel hidden">
+                    <h3>Meus Links</h3>
+                    <div id="bookmarks-list"></div>
+                    <button id="add-bookmark" class="add-button">
+                        <i class="fas fa-plus"></i> Adicionar Link
+                    </button>
+                </div>
+            </div>
+
+            <!-- Configurações -->
+            <div class="settings-section">
+                <button id="settings-toggle" class="icon-button">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+
+            <!-- Clima -->
+            <div class="weather-section">
+                <div id="weather-info">
+                    <img id="weather-icon" src="https://cdn.weatherapi.com/weather/64x64/day/116.png" alt="Clima">
+                    <span id="temperature">25°C</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Conteúdo Principal -->
+        <main>
+            <!-- Lista de Tarefas -->
+            <div class="tasks-section">
+                <h3>Tarefas</h3>
+                <div id="tasks-list">
+                    <!-- Exemplo de tarefa (será removido pelo JavaScript) -->
+                    <div class="task-item">
+                        <div class="checkbox"></div>
+                        <div class="task-content">
+                            <div class="task-title">Exemplo de tarefa</div>
+                            <div class="task-description">Descrição da tarefa</div>
+                        </div>
+                        <div class="task-actions">
+                            <button class="edit-button"><i class="fas fa-edit"></i></button>
+                            <button class="delete-button"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <button id="add-task" class="add-button">
+                    <i class="fas fa-plus"></i> Nova Tarefa
+                </button>
+            </div>
+
+            <!-- Relógio -->
+            <div class="clock-section">
+                <div id="clock">00:00:00</div>
+                <div id="date">Segunda, 1 de Janeiro</div>
+                <div id="location">São Paulo, Brasil</div>
+            </div>
+        </main>
+
+        <!-- Rodapé -->
+        <footer>
+            <!-- Lista de Eventos -->
+            <div class="events-section">
+                <h3>Próximos Eventos</h3>
+                <div id="events-list">
+                    <!-- Exemplo de evento -->
+                    <div class="event-item">
+                        <div class="event-title">Exemplo de evento</div>
+                        <div class="event-datetime">Segunda, 1 de Janeiro às 10:00</div>
+                        <div class="event-actions">
+                            <button class="edit-button"><i class="fas fa-edit"></i></button>
+                            <button class="delete-button"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <button id="add-event" class="add-button">
+                    <i class="fas fa-plus"></i> Novo Evento
+                </button>
+            </div>
+
+            <!-- Frases do Kanye -->
+            <div class="quote-section">
+                <p id="quote">"Exemplo de frase inspiradora."</p>
+                <button id="refresh-quote" class="icon-button">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modais -->
+    <div id="modal-overlay" class="hidden">
+        <!-- Modal para adicionar/editar bookmark -->
+        <div id="bookmark-modal" class="modal hidden">
+            <h3>Adicionar Link</h3>
+            <form id="bookmark-form">
+                <input type="text" id="bookmark-title" placeholder="Título" required>
+                <input type="url" id="bookmark-url" placeholder="URL (com https://)" required>
+                <div class="modal-buttons">
+                    <button type="button" class="cancel-button">Cancelar</button>
+                    <button type="submit" class="save-button">Salvar</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Modal para adicionar/editar tarefa -->
+        <div id="task-modal" class="modal hidden">
+            <h3>Nova Tarefa</h3>
+            <form id="task-form">
+                <input type="text" id="task-title" placeholder="Título" required>
+                <select id="task-priority">
+                    <option value="1">Prioridade 1 (Baixa)</option>
+                    <option value="2">Prioridade 2</option>
+                    <option value="3" selected>Prioridade 3 (Média)</option>
+                    <option value="4">Prioridade 4</option>
+                    <option value="5">Prioridade 5 (Alta)</option>
+                </select>
+                <div class="modal-buttons">
+                    <button type="button" class="cancel-button">Cancelar</button>
+                    <button type="submit" class="save-button">Salvar</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Modal para adicionar/editar evento -->
+        <div id="event-modal" class="modal hidden">
+            <h3>Novo Evento</h3>
+            <form id="event-form">
+                <input type="text" id="event-title" placeholder="Título" required>
+                <input type="date" id="event-date" required>
+                <input type="time" id="event-time" required>
+                <div class="modal-buttons">
+                    <button type="button" class="cancel-button">Cancelar</button>
+                    <button type="submit" class="save-button">Salvar</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Modal de configurações -->
+        <div id="settings-modal" class="modal hidden">
+            <h3>Configurações</h3>
+            <form id="settings-form">
+                <label for="settings-city">Cidade</label>
+                <input type="text" id="settings-city" placeholder="Ex: São Paulo" required>
+                <div class="modal-buttons">
+                    <button type="button" class="cancel-button">Cancelar</button>
+                    <button type="submit" class="save-button">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para adicionar/editar evento -->
+<div id="event-modal" class="modal hidden">
+    <h3>Novo Evento</h3>
+    <form id="event-form">
+        <input type="text" id="event-title" placeholder="Título" required>
+        <input type="date" id="event-date" required>
+        <input type="time" id="event-time" required>
+        <div class="modal-buttons">
+            <button type="button" class="cancel-button">Cancelar</button>
+            <button type="submit" class="save-button">Salvar</button>
+        </div>
+    </form>
+</div>
+
+    <script src="js/scripts.js"></script>
+    <script src="js/location.js"></script>
+    <script src="js/quotes.js"></script>
+    <script src="js/clock.js"></script>
+    <script src="js/bookmark.js"></script>
+    <script src="js/tasks.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/events.js"></script>
+</body>
+</html>
