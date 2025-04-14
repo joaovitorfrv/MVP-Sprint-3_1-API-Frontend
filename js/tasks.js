@@ -1,7 +1,7 @@
 // TaskModule: Gerenciador de tarefas com padrão de módulo revelação
 const TaskModule = (function() {
     // Configuração e estado
-    const API_BASE_URL = 'http://localhost:5000/api';
+    const API_BASE_URL = 'http://gateway:5000/api';
     let tasksLoaded = false;
     
     // Serviço de API - Responsabilidade única para comunicação com o servidor

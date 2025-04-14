@@ -1,5 +1,5 @@
 // Configuração das APIs
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = 'http://gateway:5000/api';
 
 const WEATHER_API_KEY = '8366b2c949224812ac635303250704';
 const WEATHER_API_URL = 'http://api.weatherapi.com/v1';
