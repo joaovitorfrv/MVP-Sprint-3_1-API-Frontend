@@ -261,7 +261,7 @@ Este projeto foi desenvolvido como experimento acadêmico para demonstrar e apli
 
 ## 👨‍💻 Autor
 
-Desenvolvido como projeto acadêmico por [Seu Nome]
+Desenvolvido como projeto acadêmico por João Vitor M. Frugiuele.
 
 ## 📄 Licença
 
